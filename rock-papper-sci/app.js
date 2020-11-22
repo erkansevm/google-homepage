@@ -1,5 +1,6 @@
-function computerPlay(params) {
-  let options = ["Rock","Paper","Scissors"];
+
+function computerPlay() {
+  let options = ["rock","paper","scissors"];
   let picker = Math.floor(Math.random()*3);
   return options[picker];
 }
@@ -7,38 +8,77 @@ function computerPlay(params) {
 
 function playRound(playerSelection,computerSelection) {
 
-  if (playerSelection == "Rock" && computerSelection =="Rock" ) {
+  if (playerSelection == "rock" && computerSelection =="rock" ) {
      return `Draw!.${playerSelection} equal ${computerSelection}.`;
-  } else if(playerSelection == "Paper" && computerSelection =="Paper"){
+  } else if(playerSelection == "paper" && computerSelection =="paper"){
     return `Draw!.${playerSelection} equal ${computerSelection}.`;
-  }else if(playerSelection == "Scissors" && computerSelection =="Scissors"){
+  }else if(playerSelection == "scissors" && computerSelection =="scissors"){
     return `Draw!.${playerSelection} equal ${computerSelection}.`;
-  }else if(playerSelection == "Rock" && computerSelection =="Paper"){
+  }else if(playerSelection == "rock" && computerSelection =="paper"){
     return `You lost!.${computerSelection} beats ${playerSelection}.`;
-  }else if(playerSelection == "Rock" && computerSelection =="Scissors"){
+  }else if(playerSelection == "rock" && computerSelection =="scissors"){
     return `You won!.${playerSelection} beats ${computerSelection}.`;
-  }else if(playerSelection == "Paper" && computerSelection =="Rock"){
+  }else if(playerSelection == "paper" && computerSelection =="rock"){
     return `You won!.${playerSelection} beats ${computerSelection}.`;
-  }else if(playerSelection == "Paper" && computerSelection =="Scissors"){
+  }else if(playerSelection == "paper" && computerSelection =="scissors"){
     return `You lost!.${computerSelection} beats ${playerSelection}.`;
-  }else if(playerSelection == "Scissors" && computerSelection =="Paper"){
+  }else if(playerSelection == "scissors" && computerSelection =="paper"){
     return `You won!.${playerSelection} beats ${computerSelection}.`;
-  }else if(playerSelection == "Scissors" && computerSelection =="Rock"){
+  }else if(playerSelection == "scissors" && computerSelection =="rock"){
     return `You lost!.${computerSelection} equal ${playerSelection}.`;
   }
 }
 
-function game(howMany) {
-  for (let index = 0; index < howMany; index++) {
-    let playerSelection = window.prompt('What is your choice(Rock,Paper,Scissors)');
-    let computerSelection = computerPlay();
-    console.log(playRound(playerSelection,computerSelection));
-  }
+function logPush(text) {
+    let currentChildNum = logScreen.childElementCount
+    console.log(currentChildNum);
+    if (currentChildNum<3) {
+      let p = document.createElement('p');
+    p.textContent = text;
+    logScreen.appendChild(p);
+    p.classList.add("log-p") 
+    }else{
+      logScreen.lastChild.remove();
+      let p = document.createElement('p');
+      p.textContent = text;
+      logScreen.insertBefore(p,logScreen.firstChild);
+      p.classList.add("log-p") 
+    }
+    
 }
 
 
+let rockBtn = document.querySelector('#rock');
+let paperBtn = document.querySelector('#paper');
+let scissorsBtn = document.querySelector('#scissors');
+let logScreen = document.querySelector('.log');
 
-game(5);
+const btnList = [rockBtn,paperBtn,scissorsBtn];
+logPush("Make your move !");
+
+btnList.forEach((button) => {
+
+  
+  button.addEventListener('click', () => {
+   let playerSelection = button.textContent;
+   let computerSelection = computerPlay();
+   setTimeout(() => {
+    logPush('You picked: ' + playerSelection);
+    setTimeout(() => {
+      logPush('Computer picked: ' + computerSelection);
+      setTimeout(() => {
+        logPush(playRound(playerSelection,computerSelection));
+       }, 1000);
+     }, 1000);
+   }, 1000);
+   
+   
+  });
+});
+
+
+
+
 
 
 
