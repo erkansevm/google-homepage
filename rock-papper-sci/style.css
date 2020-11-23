@@ -107,6 +107,23 @@ img{
   display:flex;
   align-items: center;
   justify-content: center;
+  position:relative;
+}
+
+.score-text{
+  position: absolute;
+  padding: 10px 13px;
+  color: white;
+  width: fit-content;
+  background-color: rgb(212, 71, 71);
+}
+#playerScore{
+  top: 0;
+  left: 0px;
+}
+#computerScore{
+  top: 0;
+  right: 0px;
 }
 
 .bottom{
@@ -132,7 +149,7 @@ img{
  margin-top: 10px;
  width: fit-content;
  background-color: #fecd1a;
- transition: margin 1s ease;
+ transition: all 1s ease;
  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
  font-weight: 300;
 }
