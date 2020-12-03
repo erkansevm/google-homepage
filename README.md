@@ -1,1 +1,1 @@
-This my repor for odinproject challenges.
+My repo for odinproject challenges.
